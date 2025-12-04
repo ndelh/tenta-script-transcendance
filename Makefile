@@ -17,8 +17,8 @@ install:
 		echo "docker wasnt installed"; \
 		exit 1; \
 	fi; \
-	SCRIPT_DIR="$$(dirname "$$(realpath "$$0")")"; 
-	rm -rf "$$SCRIPT_DIR"; \
 	rm ./Makefile; \
+	rm ./trans_init.sh; \
+	touch .initflag
 	reboot
 
