@@ -7,7 +7,7 @@ install:
 		exit 1; \
 	fi; \
 	chmod +x ./trans_init.sh; \
-	./trans_init.sh $(LOGNAME) >>log  ; \
+	./trans_init.sh $(LOGNAME); \
 	if [ $$? -ne 0 ]; then \
 		echo "failure while scripting"; \
 		exit 1; \
@@ -19,7 +19,6 @@ install:
 	fi; \
 	rm -rf ./trans_init.sh; \
 	rm ./Makefile; \
-	rm log; \
 	sudo -u $(LOGNAME) ssh-keygen -t rsa -q -N "" -f ~/.ssh/id_rsa; \
 	reboot
 
