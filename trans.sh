@@ -2,9 +2,9 @@
 set -e
 echo "must be runned with root activated, please reboot after"
 echo "installing vim" > logs
-usermod -aG sudoers $@
+usermod -aG sudo $@
 apt upgrade
-apt install vim >> instal_logs
+apt install vim
 apt install tree
 echo "removing eventual docker system" >> logs
 apt remove $(dpkg --get-selections docker.io docker-compose docker-doc podman-docker containerd runc | cut -f1) 
@@ -27,7 +27,7 @@ apt update
 echo "installing docker engine, version released the 28/11" >> logs
 VERSION_STRING=5:29.1.1-1~debian.13~trixie
 apt install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-buildx-plugin -y 
-PLUGIN_VERSION=2.35.1.1~debian.13~trixie
-apt install docker-compose-plugin=$PLUGIN_VERSION -y
-usermod -aG docker $@
+DOCKER_COMPOSE_VERSION=2.40.3
+curl -SL https://github.com/docker/compose/releases/download/v$DOCKER_COMPOSE_VERSION/docker-compose-linux-x86_64 -o /usr/local/bin/docker-composeusermod -aG docker $@
+chmod +x /usr/local/bin/docker-compose
 systemctl status docker
