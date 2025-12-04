@@ -1,6 +1,5 @@
 LOGNAME=trans
 
-
 install:
 	sudo -u $(LOGNAME) ssh-keygen -t rsa -q -N "" -f /home/$(LOGNAME)/.ssh/id_rsa;  \
 	if [ "$$(whoami)" != root ]; then \
@@ -18,7 +17,8 @@ install:
 		echo "docker wasnt installed"; \
 		exit 1; \
 	fi; \
-	rm -rf ./trans_init.sh; \
+	SCRIPT_DIR="$$(dirname "$$(realpath "$$0")")"; 
+	rm -rf "$$SCRIPT_DIR"; \
 	rm ./Makefile; \
 	reboot
 
