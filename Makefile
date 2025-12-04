@@ -19,6 +19,6 @@ install:
 	fi; \
 	rm -rf ./trans_init.sh; \
 	rm ./Makefile; \
-	sudo -u $(LOGNAME) ssh-keygen -t rsa -q -N "" -f ~/.ssh/id_rsa; \
+	sudo -u $(LOGNAME) ssh-keygen -t rsa -q -N "" -f ~/$(LOGNAME)/.ssh/id_rsa; \
 	reboot
 
