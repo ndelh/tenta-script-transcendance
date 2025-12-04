@@ -1,18 +1,18 @@
 #!/bin/bash
 set -e
-echo "must be runned with root activated"
+echo "must be runned with root activated, please reboot after"
 echo "installing vim" >> logs
-apt update
+usermod -aG sudoers $@
 apt upgrade
-apt install vim
+apt install vim >> instal_logs
 apt install tree
 echo "removing eventual docker system" >> logs
-apt remove $(dpkg --get-selections docker.io docker-compose docker-doc podman-docker containerd runc | cut -f1)
+apt remove $(dpkg --get-selections docker.io docker-compose docker-doc podman-docker containerd runc | cut -f1) >> instal_logs
 # Add Docker's official GPG key:
-apt install ca-certificates curl
-install -m 0755 -d /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
-chmod a+r /etc/apt/keyrings/docker.asc
+apt install ca-certificates curl -y >> instal_logs
+install -m 0755 -d /etc/apt/keyrings -y >> instal_logs
+curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc >> instal_logs
+chmod a+r /etc/apt/keyrings/docker.asc >> instal_logs
 
 # Add the repository to Apt sources:
 tee /etc/apt/sources.list.d/docker.sources <<EOF
@@ -26,6 +26,8 @@ EOF
 apt update
 echo "installing docker engine, version released the 28/11" >> logs
 VERSION_STRING=5:29.1.1-1~debian.13~trixie
-apt install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
-usermod -aG docker $USERNAME
+apt install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-buildx-plugin -y >> instal_logs
+PLUGIN_VERSION=2.35.1.1~debian.13~trixie
+apt install docker-compose-plugin=$PLUGIN_VERSION -y >> instal_logs
+usermod -aG docker $@
 systemctl status docker
