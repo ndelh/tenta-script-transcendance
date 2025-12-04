@@ -10,8 +10,8 @@ apt install vim -y
 apt install tree -y
 # Add Docker's official GPG key:
 apt update
-apt install ca-certificates curl -y
-install -m 0755 -d /etc/apt/keyrings -y
+apt install ca-certificates curl 
+install -m 0755 -d /etc/apt/keyrings 
 curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
 chmod a+r /etc/apt/keyrings/docker.asc
 
@@ -24,7 +24,8 @@ Components: stable
 Signed-By: /etc/apt/keyrings/docker.asc
 EOF
 
-VERSION_STRING=5:29.1.2-1~debian.13~trixie
+apt update
+VERSION_STRING=5:29.1.1-1~debian.13~trixie
 apt install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin -y
 usermod -aG docker $@
 systemctl status docker
