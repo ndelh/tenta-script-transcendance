@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e
-echo "must be runned with root activated, please reboot after"
 usermod -aG sudo $@
 echo "removing eventual docker system" >> logs
 apt remove $(dpkg --get-selections docker.io docker-compose docker-doc podman-docker containerd runc | cut -f1)
@@ -28,4 +27,3 @@ apt update
 VERSION_STRING=5:29.1.1-1~debian.13~trixie
 apt install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin -y
 usermod -aG docker $@
-systemctl status docker
