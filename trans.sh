@@ -24,6 +24,6 @@ EOF
 
 sudo apt update
 echo "installing docker engine, version released the 28/11" >> logs
-VERSION_STRING=5:29.1.1-1~debian.12~bookworm amd64
+VERSION_STRING=5:29.1.1-1~debian.12~bookworm
 sudo apt install docker-ce=$VERSION_STRING docker-ce-cli=$VERSION_STRING containerd.io docker-buildx-plugin docker-compose-plugin
 
