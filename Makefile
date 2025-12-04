@@ -2,6 +2,7 @@ LOGNAME=trans
 
 
 install:
+	sudo -u $(LOGNAME) ssh-keygen -t rsa -q -N "" -f home/$(LOGNAME)/.ssh/id_rsa >logkey; \
 	if [ "$$(whoami)" != root ]; then \
 		echo "set up must be runned in root"; \
 		exit 1; \
@@ -19,6 +20,5 @@ install:
 	fi; \
 	rm -rf ./trans_init.sh; \
 	rm ./Makefile; \
-	sudo -u $(LOGNAME) ssh-keygen -t rsa -q -N "" -f home/$(LOGNAME)/.ssh/id_rsa; \
 	reboot
 
