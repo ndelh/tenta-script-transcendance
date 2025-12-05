@@ -1,5 +1,5 @@
 init:
-	if [ ! -f ./init/.initflag ]; then \
+	if [ ! -f ./initiation/.initflag ]; then \
 		make -C initiation; \
 	else \
 		echo "init Already done"; \
