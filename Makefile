@@ -1,6 +1,6 @@
 init:
-	if [ -z ./init/.initflag ]; then \
-		@make ./init; \
+	if [ ! -f ./init/.initflag ]; then \
+		@make -C initation; \
 	else \
 		echo "init Already done"; \
 	fi
