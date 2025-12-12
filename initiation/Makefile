@@ -17,8 +17,6 @@ install:
 		echo "docker wasnt installed"; \
 		exit 1; \
 	fi; \
-	rm ./Makefile; \
-	rm ./trans_init.sh; \
 	touch .initflag
 	reboot
 

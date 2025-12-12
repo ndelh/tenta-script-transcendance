@@ -7,6 +7,9 @@ apt update
 apt upgrade -y
 apt install vim -y
 apt install tree -y
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo dpkg -i google-chrome-stable_current_amd64.deb
+google-chrome
 # Add Docker's official GPG key:
 apt update
 apt install ca-certificates curl -y 
